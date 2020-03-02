@@ -87,11 +87,11 @@ public class LancheIngredienteController {
 		}
 		
 		if (listIngredientes.stream().filter(str -> str.getNome().equals("queijo")).count() >= 3) {
-			long hamburguerDescontado = (listIngredientes.stream().filter(str -> str.getNome().equals("queijo")).count() / 3);
+			long queijoDescontado = (listIngredientes.stream().filter(str -> str.getNome().equals("queijo")).count() / 3);
 			lanche.setPreco(lanche.getPreco()
 				.subtract(
 					ingredienteController.buscarPorNome("queijo").getPreco()
-					.multiply(new BigDecimal(String.valueOf(hamburguerDescontado))
+					.multiply(new BigDecimal(String.valueOf(queijoDescontado))
 					)
 				)
 			);
