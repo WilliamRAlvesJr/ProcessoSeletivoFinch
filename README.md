@@ -10,6 +10,11 @@
 
 Ou executar o sql no arquivo **"Instalação/script_sql.txt"**. (necessário executar sempre que executar o programa) .
 
+### Detalhes do banco
+O banco deve estar configurado com **"Timezone=America/Sao_Paulo"**, as credenciais do banco devem ser usuário **"root"** e senha **""**.
+
+Ou basta alterar o arquivo **"application.properties"** para inserir as credencias de preferência.
+
 ### Lombok
 Na pasta **"Instalação"**, existe o arquivo **"lombok-1.18.10"**, é necessário executar e instalar em sua IDE de preferência.
 
