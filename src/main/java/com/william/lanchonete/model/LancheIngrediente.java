@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,11 +33,12 @@ public class LancheIngrediente implements Serializable {
 	@Column(name = "lanche_ingrediente_id")
 	private long lancheIngredienteId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "lanche_id")
     Lanche lanche;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "ingrediente_id")
 	Ingrediente ingrediente;
 

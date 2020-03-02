@@ -22,22 +22,21 @@ public class LancheIngredienteServiceImpl implements LancheIngredienteService {
 
 	@Override
 	public List<LancheIngrediente> buscaTodos() {
-		log.info("Buscando por todos os ingredientes");
+		log.info("Buscando por todos os lanche-ingredientes");
 		return lancheIngredienteRepository.findAll();
 	}
 
 	@Override
 	public Optional<LancheIngrediente> buscarPorId(long id) {
-		log.info("Buscando por ingrediente com id: {}", id);
-//		return lancheIngredienteRepository.findByLancheIngredienteId(id);
-		return null;
+		log.info("Buscando por lanche-ingrediente com id: {}", id);
+		return lancheIngredienteRepository.findByLancheIngredienteId(id);
 	}
-
-//	@Override
-//	public Optional<LancheIngrediente> buscarPorNome(String nome) {
-//		log.info("Buscando por ingrediente com nome: {}", nome);
-//		return lancheIngredienteRepository.findByNome(nome);
-//	}
+	
+	@Override
+	public List<Optional<LancheIngrediente>> buscarPorLancheNome(String nome) {
+		log.info("Buscando por lanche-ingrediente com nome: {}", nome);
+		return lancheIngredienteRepository.findByLancheNome(nome);
+	}
 
 	@Override
 	public void salvar(LancheIngrediente lancheIngrediente) {
@@ -54,7 +53,7 @@ public class LancheIngredienteServiceImpl implements LancheIngredienteService {
 	
 	@Override
 	public void salvarListaIngredientes(List<LancheIngrediente> listLancheIngrediente) {
-		log.info("Salvando ingrediente(s): {}", listLancheIngrediente);
+		log.info("Salvando lanche-ingrediente(s): {}", listLancheIngrediente);
 		lancheIngredienteRepository.saveAll(listLancheIngrediente);
 	}
 

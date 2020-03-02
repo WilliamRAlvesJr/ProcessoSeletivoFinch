@@ -32,13 +32,13 @@ public class IngredienteController {
 		return ingredienteServiceImpl.buscaTodos();
 	}
 	
-	@CachePut("ingredientePorId")
 	@GetMapping("/buscarPorId/{id}")
 	Ingrediente buscarPorId(@PathVariable long id) {
 		return ingredienteServiceImpl.buscarPorId(id)
 			.orElseThrow(() -> new RuntimeException("Não foi possível encontrar o ingrediente com id " + id));
 	}
 
+	@CachePut("ingredientePorNome")
 	@GetMapping("/buscarPorNome/{nome}")
 	public Ingrediente buscarPorNome(@PathVariable String nome) {
 		return ingredienteServiceImpl.buscarPorNome(nome)

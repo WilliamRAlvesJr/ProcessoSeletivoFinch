@@ -16,23 +16,19 @@ import com.william.lanchonete.controller.LancheIngredienteController;
 import com.william.lanchonete.model.Ingrediente;
 import com.william.lanchonete.model.Lanche;
 import com.william.lanchonete.service.impl.IngredienteServiceImpl;
-import com.william.lanchonete.service.impl.LancheServiceImpl;
 
 @SpringBootApplication
 @EnableCaching
 public class SistemaLanchoneteApplication {
 	
 	@Autowired
-	private IngredienteServiceImpl IngredienteServiceImpl;
+	private IngredienteServiceImpl ingredienteServiceImpl;
 	
 	@Autowired
 	private IngredienteController ingredienteController;
 
 	@Autowired
 	private LancheController lancheController;
-	
-	@Autowired
-	private LancheServiceImpl lancheServiceImpl; 
 	
 	@Autowired
 	private LancheIngredienteController lancheIngredienteController;
@@ -46,7 +42,7 @@ public class SistemaLanchoneteApplication {
 		return args -> {
 			
 			// Ingredientes
-			this.IngredienteServiceImpl.removeTodos();
+			this.ingredienteServiceImpl.removeTodos();
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			Ingrediente ingrediente = null;
@@ -58,7 +54,7 @@ public class SistemaLanchoneteApplication {
 				"  \"ingredienteId\": null,\n" + 
 				"  \"nome\": \"Alface\",\n" + 
 				"  \"preco\": 0.40,\n" + 
-				"  \"lancheIngrediente\": []\n" + 
+				"  \"listLancheIngrediente\": []\n" + 
 				"}";
 			ingrediente = objectMapper.readValue(json, Ingrediente.class);
 			ingredienteController.novoIngrediente(ingrediente);
@@ -68,13 +64,13 @@ public class SistemaLanchoneteApplication {
 				"  \"ingredienteId\": null,\n" + 
 				"  \"nome\": \"Bacon\",\n" + 
 				"  \"preco\": 2.00,\n" + 
-				"  \"lancheIngrediente\": []\n" + 
+				"  \"listLancheIngrediente\": []\n" + 
 				"}";
 			ingrediente = objectMapper.readValue(json, Ingrediente.class);
 			ingredienteController.novoIngrediente(ingrediente);
 			
 			// Salvando direto no banco
-			this.IngredienteServiceImpl.salvarTodos(
+			this.ingredienteServiceImpl.salvarTodos(
 				new Ingrediente("Hamburguer", new BigDecimal("3.00")),
 				new Ingrediente("Ovo",        new BigDecimal("0.80")),
 				new Ingrediente("Queijo",     new BigDecimal("1.50"))
@@ -88,24 +84,6 @@ public class SistemaLanchoneteApplication {
 			lancheIngredienteController.removerTodos();
 			// Lanches
 			
-//			json =
-//				"{\n" + 
-//				"  \"ingrediente\": {\n" + 
-//				"    \"ingredienteId\": 2,\n" + 
-//				"    \"nome\": \"Bacon\",\n" + 
-//				"    \"preco\": 2.00,\n" + 
-//				"    \"lancheIngrediente\": []\n" +  
-//				"  },\n" + 
-//				"  \"lanche\": {\n" + 
-//				"    \"lancheId\": 6,\n" + 
-//				"    \"nome\": \"x-bacon\",\n" + 
-//				"    \"preco\": 0,\n" + 
-//				"    \"listLancheIngrediente\": []\n" + 
-//				"  },\n" + 
-//				"  \"lancheIngredienteId\": 0\n" + 
-//				"}";
-//			LancheIngrediente lancheIngrediente = objectMapper.readValue(json, LancheIngrediente.class);
-			
 			Lanche lanche = null;
 			json =
 				"  {\n" + 
@@ -116,7 +94,6 @@ public class SistemaLanchoneteApplication {
 				"  }";
 			lanche = objectMapper.readValue(json, Lanche.class);
 			lanche.setNome("x-bacon");
-			lancheServiceImpl.salvar(lanche);
 			lancheIngredienteController.montaLanche(
 				lanche, 
 				ingredienteController.buscarPorNome("bacon"),
@@ -126,7 +103,6 @@ public class SistemaLanchoneteApplication {
 			
 			lanche = objectMapper.readValue(json, Lanche.class);
 			lanche.setNome("x-burger");
-			lancheServiceImpl.salvar(lanche);
 			lancheIngredienteController.montaLanche(
 				lanche, 
 				ingredienteController.buscarPorNome("hamburguer"),
@@ -135,7 +111,6 @@ public class SistemaLanchoneteApplication {
 				
 			lanche = objectMapper.readValue(json, Lanche.class);
 			lanche.setNome("x-egg");
-			lancheServiceImpl.salvar(lanche);
 			lancheIngredienteController.montaLanche(
 				lanche, 
 				ingredienteController.buscarPorNome("ovo"),
@@ -145,7 +120,6 @@ public class SistemaLanchoneteApplication {
 				
 			lanche = objectMapper.readValue(json, Lanche.class);
 			lanche.setNome("x-egg bacon");
-			lancheServiceImpl.salvar(lanche);
 			lancheIngredienteController.montaLanche(
 				lanche, 
 				ingredienteController.buscarPorNome("ovo"),
@@ -153,6 +127,35 @@ public class SistemaLanchoneteApplication {
 				ingredienteController.buscarPorNome("hamburguer"),
 				ingredienteController.buscarPorNome("queijo")
 			);	
+			
+			// Lanches promocionais	
+			lanche = objectMapper.readValue(json, Lanche.class);
+			lanche.setNome("x-salada");
+			lancheIngredienteController.montaLanche(
+				lanche, 
+				ingredienteController.buscarPorNome("alface"),
+				ingredienteController.buscarPorNome("hamburguer")
+			);
+			
+			lanche = objectMapper.readValue(json, Lanche.class);
+			lanche.setNome("tiplo-burguer");
+			lancheIngredienteController.montaLanche(
+				lanche,
+				ingredienteController.buscarPorNome("hamburguer"),
+				ingredienteController.buscarPorNome("hamburguer"),
+				ingredienteController.buscarPorNome("hamburguer"),
+				ingredienteController.buscarPorNome("queijo")
+			);
+			
+			lanche = objectMapper.readValue(json, Lanche.class);
+			lanche.setNome("tiplo-queijo");
+			lancheIngredienteController.montaLanche(
+				lanche,
+				ingredienteController.buscarPorNome("hamburguer"),
+				ingredienteController.buscarPorNome("queijo"),
+				ingredienteController.buscarPorNome("queijo"),
+				ingredienteController.buscarPorNome("queijo")
+			);
 		};
 	}
 

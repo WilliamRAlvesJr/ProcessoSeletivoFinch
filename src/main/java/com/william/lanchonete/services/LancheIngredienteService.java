@@ -9,7 +9,7 @@ public interface LancheIngredienteService {
 
 	List<LancheIngrediente> buscaTodos();
 	Optional<LancheIngrediente> buscarPorId(long id);
-//	Optional<LancheIngrediente> buscarPorNome(String nome);
+	List<Optional<LancheIngrediente>> buscarPorLancheNome(String nome);
 	void salvar(LancheIngrediente lancheIngrediente);
 	void salvarTodos(LancheIngrediente... lancheIngrediente);
 	void salvarListaIngredientes(List<LancheIngrediente> listLancheIngrediente);

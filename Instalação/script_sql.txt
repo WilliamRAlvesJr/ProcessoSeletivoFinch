@@ -1,0 +1,28 @@
+CREATE DATABASE lanchonete;
+
+CREATE TABLE IF NOT EXISTS hibernate_sequence (
+  next_val int default 1
+);
+
+INSERT INTO hibernate_sequence VALUES (1);
+
+CREATE TABLE IF NOT EXISTS ingrediente (
+  ingrediente_id int NOT NULL,
+  nome varchar(200) NOT NULL,
+  preco decimal(19,2) NOT NULL,
+  PRIMARY KEY (ingrediente_id)
+);
+
+CREATE TABLE IF NOT EXISTS lanche (
+  lanche_id int NOT NULL,
+  nome varchar(200) NOT NULL,
+  preco decimal(19,2) NOT NULL,
+  PRIMARY KEY (lanche_id)
+);
+
+CREATE TABLE IF NOT EXISTS lanche_ingrediente (
+  lanche_ingrediente_id int NOT NULL,
+  lanche_id int NOT NULL,
+  ingrediente_id int NOT NULL,
+  PRIMARY KEY (lanche_ingrediente_id, lanche_id, ingrediente_id)
+);

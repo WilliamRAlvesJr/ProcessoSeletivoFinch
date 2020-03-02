@@ -42,7 +42,7 @@ public class Ingrediente implements Serializable {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lanche_ingrediente_id")
-	List<LancheIngrediente> lancheIngrediente;
+	List<LancheIngrediente> listLancheIngrediente;
 
 	public Ingrediente(String nome, BigDecimal preco) {
 		this.nome = nome.toLowerCase();

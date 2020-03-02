@@ -12,7 +12,6 @@
 	</head>
 
 	<body>
-		<img alt="image"  src="<c:url value="images/Fundo.jpg" />">
 		<h1> Lanchonete
 		</h1>
 	</body>
