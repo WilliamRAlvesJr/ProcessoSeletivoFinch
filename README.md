@@ -35,3 +35,13 @@ Para executar, basta utilizar o seguinte comando na raiz do projeto:
 ```bash
  java -jar target/SistemaLanchonete-0.0.1-SNAPSHOT.jar
 ```
+
+## Sobre o projeto
+
+O programa não possui visualização gráfica, apenas APIs.
+
+Utilize o Swagger para verificar as APIs:
+```
+http://localhost:8080/swagger-ui.html
+```
+
