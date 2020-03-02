@@ -11,7 +11,7 @@
 Ou executar o sql no arquivo **"Instalação/script_sql.txt"**. (necessário executar sempre que executar o programa) .
 
 ### Detalhes do banco
-O banco deve estar configurado com **"Timezone=America/Sao_Paulo"**, as credenciais do banco devem ser usuário **"root"** e senha **""**.
+O banco deve estar configurado com **"Timezone=America/Sao_Paulo"**, as credenciais do banco devem ser: usuário **"root"** e senha **""**.
 
 Ou basta alterar o arquivo **"application.properties"** para inserir as credencias de preferência.
 
